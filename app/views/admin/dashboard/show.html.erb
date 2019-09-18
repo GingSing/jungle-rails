@@ -1,2 +1,21 @@
 <h1>Admin::Dashboard#show</h1>
-<p>Find me in app/views/admin/dashboard/show.html.erb</p>
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th>
+        <%= link_to 'Number of Products', :admin_products %>
+      </th>
+      <th>
+        <%= @products_count %>
+      </th>
+    </tr>
+    <tr>
+      <th>
+      <%= link_to 'Number of Categories', :admin_products %>
+      </th>
+      <th>
+        <%= @categories_count %>
+      </th>
+    </tr>
+  </tbody>
+</table>
