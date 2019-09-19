@@ -1,0 +1,37 @@
+<section class="users-new">
+
+<div class="page-header">
+<h1>Signup!</h1>
+</div>
+
+<%= form_for :user, url: '/users' do |f| %>
+
+  <div class="form-group">
+    <%= f.label "First Name:" %>
+    <%= f.text_field :first_name, class:'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Last Name:" %>
+    <%= f.text_field :last_name, class:'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Email:" %>
+    <%= f.text_field :email, class:'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label "Password:"%>
+    <%= f.password_field :password, class:'form-control' %>
+  </div>
+
+  <div class="form-group">
+  <%= f.label "Password Confirmation:" %>
+  <%= f.password_field :password_confirmation, class:'form-control' %>
+  </div>
+
+  <%= f.submit "Submit" %>
+
+<% end %>
+</section>
