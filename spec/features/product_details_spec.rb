@@ -22,7 +22,7 @@ RSpec.feature "Visitor navigates to products page", type: :feature, js: true do
     visit root_path
 
     # VERIFY
-    first('img').click
+    first('.product img').click
     sleep 2
     save_screenshot
   end
