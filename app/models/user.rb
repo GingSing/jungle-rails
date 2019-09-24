@@ -12,4 +12,14 @@ class User < ActiveRecord::Base
   validates :password, presence: true, format: PASSWORD_REQUIREMENTS
   validates :password_confirmation, presence: true
 
+  def self.authenticate_with_credentials(email, password)
+    stripped_email = email.strip! || email
+    puts stripped_email
+    @user = User.where("LOWER(email) = ?", stripped_email.downcase).first
+    if @user && @user.authenticate(password)
+      return @user
+    end
+    nil
+  end
+
 end

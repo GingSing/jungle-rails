@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  subject { described_class.new(
+    first_name: "Anything",
+    last_name: "Anything",
+    email: "Anything@email.com",
+    password: "Anything",
+    password_confirmation: "Anything"
+  )}
   describe "Validation" do
-    subject { described_class.new(
-      first_name: "Anything",
-      last_name: "Anything",
-      email: "Anything@email.com",
-      password: "Anything",
-      password_confirmation: "Anything"
-    )}
     it "is valid with valid attributes" do
       expect(subject).to be_valid
     end
@@ -42,6 +42,28 @@ RSpec.describe User, type: :model do
       subject.password = "5etw"
       expect(subject).to_not be_valid
     end
+  end
 
+  describe '.authenticate_with_credentials' do
+    it "should return user if it exists" do
+      subject.save
+      @user = User.authenticate_with_credentials("Anything@email.com", "Anything")
+      expect(@user).to_not be_nil
+    end
+    it "should return nil if user doesn't exist" do
+      subject.save
+      @user = User.authenticate_with_credentials("Nothing@email.com", "Nothing")
+      expect(@user).to be_nil
+    end
+    it "should return user if spaces exist before the email" do
+      subject.save
+      @user = User.authenticate_with_credentials("   Anything@email.com", "Anything")
+      expect(@user).to_not be_nil
+    end
+    it "should return user if case is wrong" do
+      subject.save
+      @user = User.authenticate_with_credentials("AnYtHiNg@EmAiL.cOm", "Anything")
+      expect(@user).to_not be_nil
+    end
   end
 end
